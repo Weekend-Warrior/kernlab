@@ -697,7 +697,6 @@ setMethod("kernelMatrix",signature(kernel="splinekernel"),kernelMatrix.splineker
 kernelMatrix.stringkernel <- function(kernel, x, y=NULL)
 { 
   n <- length(x)
-  res1 <- matrix(rep(0,n*n), ncol = n)
   normalized = kpar(kernel)$normalized
 
   if(is(x,"list"))
@@ -708,6 +707,7 @@ kernelMatrix.stringkernel <- function(kernel, x, y=NULL)
 
   if (kpar(kernel)$type == "sequence" |kpar(kernel)$type == "string"|kpar(kernel)$type == "fullstring")
     {
+      res1 <- matrix(rep(0,n*n), ncol = n)
       resdiag <- rep(0,n)
       if(normalized == TRUE)
         kernel <- stringdot(length = kpar(kernel)$length, type = kpar(kernel)$type, lambda = kpar(kernel)$lambda, normalized = FALSE)
